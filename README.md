@@ -23,5 +23,12 @@ python crawler/top5.py
 Steam appdetails/appreviews, SteamSpy 모두 공개 엔드포인트만 사용합니다.
 
 GitHub Actions가 매일 자동으로 `daily_snapshot.py`를 돌리고 결과를 커밋합니다
-(`.github/workflows/daily-crawl.yml`). 단, 이 워크플로우는 default 브랜치(main)에
-있어야 스케줄이 동작하므로, 검증 후 main에 머지되기 전까지는 로컬/수동 실행으로 확인합니다.
+(`.github/workflows/daily-crawl.yml`, `main`에 병합되어 매일 KST 06:00에 실행 중).
+
+## 현재 데이터 현황
+
+<!-- STATUS:START -->
+- 마지막 갱신: 2026-07-26 01:18
+- 추적 중인 코옵+인디 게임: **4005개**
+- 2026-07-25자 리뷰 스냅샷: 398개
+<!-- STATUS:END -->
