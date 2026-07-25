@@ -11,7 +11,11 @@ STEAMSPY_TAG = "Co-op"
 MAX_CANDIDATES = 10000  # 실질적으로 전체 커버 (SteamSpy Co-op 태그 총량 약 6,250개)
 REQUIRED_GENRE = "Indie"
 
-REQUEST_DELAY_SECONDS = 1.5
+REQUEST_DELAY_SECONDS = float(os.getenv("REQUEST_DELAY_SECONDS", "1.0"))
+
+# discover_games가 appdetails를 동시에 몇 개까지 병렬로 조회할지. 5로 시도했더니 Steam이
+# 거의 즉시 429(Too Many Requests)로 막아서 1(순차)로 되돌림.
+DISCOVER_WORKERS = int(os.getenv("DISCOVER_WORKERS", "1"))
 
 # ISO 8601 (예: "2026-07-25T17:55:00+09:00"). 설정되면 discover_games가 이 시각 이후
 # 새 후보 처리를 시작하지 않고 진행 중이던 건만 마치고 중단한다.

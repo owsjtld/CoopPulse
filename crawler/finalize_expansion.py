@@ -36,8 +36,8 @@ def main():
     replace_status(README_PATH, readme_block)
 
     claude_block = (
-        f"{now_str} 기준 추적 게임 {total_games}개 (SteamSpy Co-op 태그 로컬 전량 스캔 진행 중, "
-        f"5시 55분 데드라인으로 중단될 수 있음 — 남은 후보는 다음 로컬/수동 실행에서 이어서 처리)."
+        f"{now_str} 기준 추적 게임 {total_games}개 (SteamSpy Co-op 태그 로컬 전량 스캔 진행 중 — "
+        f"남은 후보는 다음 로컬/수동 실행에서 이어서 처리)."
     )
     replace_status(CLAUDE_PATH, claude_block)
 
