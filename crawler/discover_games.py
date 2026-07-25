@@ -25,12 +25,14 @@ def main():
             continue
 
         price_overview = details.get("price_overview") or {}
+        final_price = price_overview.get("final")
         upsert_game(
             app_id=app_id,
             name=details.get("name"),
             developer=", ".join(details.get("developers", [])),
             release_date=(details.get("release_date") or {}).get("date"),
-            price_krw=price_overview.get("final"),
+            # Steam은 KRW도 다른 화폐처럼 100을 곱해서 반환한다 (525000 == ₩5,250)
+            price_krw=final_price // 100 if final_price is not None else None,
             genres=json.dumps([g["description"] for g in details.get("genres", [])], ensure_ascii=False),
             categories=json.dumps([c["description"] for c in details.get("categories", [])], ensure_ascii=False),
         )
