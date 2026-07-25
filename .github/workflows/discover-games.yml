@@ -1,0 +1,28 @@
+name: Discover Co-op Indie Games
+
+on:
+  workflow_dispatch: {} # 수동 실행 — 신규 후보 게임을 games 테이블에 등록/갱신할 때만 돌림
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run discovery
+        run: python crawler/discover_games.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "coop-radar-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/games.db
+          git diff --staged --quiet || git commit -m "chore: refresh tracked games list"
+          git push

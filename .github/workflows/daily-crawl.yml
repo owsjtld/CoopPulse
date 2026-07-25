@@ -1,0 +1,30 @@
+name: Daily Steam Review Snapshot
+
+on:
+  schedule:
+    - cron: "0 21 * * *" # 매일 UTC 21:00 = KST 06:00
+  workflow_dispatch: {}
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run daily snapshot
+        run: python crawler/daily_snapshot.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "coop-radar-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/games.db
+          git diff --staged --quiet || git commit -m "chore: daily review snapshot $(date -u +%F)"
+          git push
