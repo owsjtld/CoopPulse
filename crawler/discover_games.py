@@ -1,6 +1,7 @@
 import json
+from datetime import datetime
 
-from config import REQUIRED_GENRE
+from config import DEADLINE, REQUIRED_GENRE
 from db import get_all_tracked_app_ids, init_db, upsert_game
 from steam_client import fetch_appdetails
 from steamspy_client import fetch_tag_candidate_app_ids
@@ -18,8 +19,16 @@ def main():
     candidates = [a for a in candidates if a not in already_tracked]
     print(f"[discover] Co-op 태그 후보 {len(candidates)}개 (이미 등록된 {len(already_tracked)}개는 스킵)", flush=True)
 
+    deadline = datetime.fromisoformat(DEADLINE) if DEADLINE else None
+
     added = 0
+    stopped_early = False
     for i, app_id in enumerate(candidates, start=1):
+        if deadline and datetime.now(deadline.tzinfo) >= deadline:
+            print(f"[discover] 데드라인 도달 — {i - 1}/{len(candidates)}에서 중단", flush=True)
+            stopped_early = True
+            break
+
         details = fetch_appdetails(app_id)
         if details and details.get("type") == "game" and is_indie(details):
             price_overview = details.get("price_overview") or {}
@@ -38,7 +47,8 @@ def main():
         if i % 25 == 0:
             print(f"[discover] 진행 {i}/{len(candidates)} (등록 {added}개)", flush=True)
 
-    print(f"[discover] 인디+코옵 조건 통과 {added}개 게임 등록/갱신 완료")
+    status = "(데드라인으로 중단)" if stopped_early else "(전체 완료)"
+    print(f"[discover] 인디+코옵 조건 통과 {added}개 게임 등록/갱신 완료 {status}")
 
 
 if __name__ == "__main__":
