@@ -41,7 +41,7 @@ def main():
     )
     replace_status(CLAUDE_PATH, claude_block)
 
-    print(f"[finalize] 문서 갱신 완료 — 게임 {total_games}개, 오늘자 스냅샷 {today_snapshots}개")
+    print(f"[finalize] 문서 갱신 완료 - 게임 {total_games}개, 오늘자 스냅샷 {today_snapshots}개")
 
 
 if __name__ == "__main__":

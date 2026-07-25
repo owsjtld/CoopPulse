@@ -25,7 +25,7 @@ def main():
     stopped_early = False
     for i, app_id in enumerate(candidates, start=1):
         if deadline and datetime.now(deadline.tzinfo) >= deadline:
-            print(f"[discover] 데드라인 도달 — {i - 1}/{len(candidates)}에서 중단", flush=True)
+            print(f"[discover] 데드라인 도달 - {i - 1}/{len(candidates)}에서 중단", flush=True)
             stopped_early = True
             break
 
