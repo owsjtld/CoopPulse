@@ -15,7 +15,7 @@ python crawler/discover_games.py
 # 2. 오늘자 리뷰 스냅샷 저장 (매일 실행)
 python crawler/daily_snapshot.py
 
-# 3. 최근 7일 리뷰 증가량 Top 5 확인
+# 3. 최근 7일 리뷰 증가량 Top 5 확인 (메가 히트 / 신흥 주목작 / 평점 급변동 3분할)
 python crawler/top5.py
 ```
 
@@ -28,7 +28,7 @@ GitHub Actions가 매일 자동으로 `daily_snapshot.py`를 돌리고 결과를
 ## 현재 데이터 현황
 
 <!-- STATUS:START -->
-- 마지막 갱신: 2026-07-26 01:18
-- 추적 중인 코옵+인디 게임: **4005개**
-- 2026-07-25자 리뷰 스냅샷: 398개
+- 마지막 갱신: 2026-07-26 15:03
+- 추적 중인 코옵+인디 게임: **4047개**
+- 2026-07-26자 리뷰 스냅샷: 4005개
 <!-- STATUS:END -->

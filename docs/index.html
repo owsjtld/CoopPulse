@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoopPulse — 이번 주 뜨는 코옵 인디게임</title>
+<meta name="description" content="Steam 리뷰 증가량 기반, 이번 주 코옵 인디게임 시장 현황. 매주 갱신.">
+<style>
+  :root {
+    --bg: #0e1210;
+    --panel: #141a17;
+    --panel-edge: #1e2620;
+    --ink: #e8eae4;
+    --muted: #8b9490;
+    --faint: #5a635e;
+    --amber: #e8a33d;
+    --amber-dim: #6b552a;
+    --teal: #4fbfa8;
+    --teal-dim: #2e5750;
+    --rule: #262e29;
+    --mono: 'JetBrains Mono', 'Cascadia Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--teal); }
+
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+
+  /* masthead */
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 18px;
+    margin-bottom: 8px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .wordmark {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .wordmark span { color: var(--teal); }
+
+  .edition-stamp {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .beta-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--amber);
+    margin: 18px 0 36px;
+  }
+  .beta-flag::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--amber);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .beta-flag::before { animation: none; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  .intro {
+    font-size: 16.5px;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .intro-sub {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    border-left: 2px solid var(--rule);
+    padding-left: 12px;
+    margin-bottom: 36px;
+  }
+
+  /* ad slot — placeholder only, no network wired up yet */
+  .ad-slot {
+    border: 1px dashed var(--rule);
+    border-radius: 4px;
+    padding: 14px;
+    margin-bottom: 40px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: var(--faint);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* section */
+  .section {
+    margin-bottom: 40px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .tag-mega { color: #1a1206; background: var(--amber); }
+  .tag-emerging { color: #061a16; background: var(--teal); }
+  .tag-rating { color: var(--bg); background: var(--muted); }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .section-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+    margin-bottom: 16px;
+  }
+
+  .rank-table {
+    border-top: 1px solid var(--rule);
+  }
+  .rank-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .rank-top {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .rank-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .rank-name {
+    font-family: var(--serif);
+    font-size: 15.5px;
+    color: var(--ink);
+  }
+  .rank-name small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint);
+    margin-top: 2px;
+  }
+  .rank-stat {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .stat-up { color: var(--amber); }
+  .stat-up-teal { color: var(--teal); }
+  .stat-flat { color: var(--muted); }
+  .stat-down { color: #d4776a; }
+
+  .side-mega .rank-row { border-left: 2px solid var(--amber-dim); padding-left: 12px; }
+  .side-emerging .rank-row { border-left: 2px solid var(--teal-dim); padding-left: 12px; }
+  .side-rating .rank-row { border-left: 2px solid var(--rule); padding-left: 12px; }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-left: 42px;
+  }
+  .tag-chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+
+  .why {
+    padding-left: 42px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .why b {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .why.mixed b { color: var(--amber); }
+  .why.negative b { color: #d4776a; }
+  .why.positive b { color: var(--teal); }
+  .why.thin b { color: var(--faint); }
+
+  /* disclosure box */
+  .disclosure {
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 4px;
+    padding: 18px 20px;
+    margin: 44px 0;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .disclosure b { color: var(--ink); font-weight: 600; }
+
+  /* subscribe CTA */
+  .subscribe {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 4px;
+    padding: 18px 20px;
+    margin-bottom: 44px;
+  }
+  .subscribe-text { font-size: 14px; }
+  .subscribe-text b { display: block; font-size: 15.5px; margin-bottom: 3px; }
+  .subscribe-cta {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 7px 12px;
+    white-space: nowrap;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    .page { padding: 36px 16px 60px; }
+    .rank-row { grid-template-columns: 20px 1fr auto; gap: 8px; }
+    .wordmark { font-size: 19px; }
+    .subscribe { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="masthead">
+    <div class="wordmark">COOP<span>PULSE</span></div>
+    <div class="edition-stamp">2026-07-27 기준<br>추적 중: 4,047개</div>
+  </div>
+
+  <div class="beta-flag">BETA — 데이터 수집 초기 단계</div>
+
+  <!-- ad-slot: top banner. AdSense 등 실제 광고 스크립트는 계정 발급 후 이 자리에 삽입 -->
+  <div class="ad-slot">광고 영역 (준비 중)</div>
+
+  <p class="intro">이번 주 코옵 인디게임 시장에서 리뷰가 움직인 타이틀들.</p>
+  <p class="intro-sub">
+    지금은 스냅샷이 07-25 → 07-26, 하루치 차이만 반영된 상태입니다. 트레일링 7일 데이터가
+    쌓이기 전까지는 신흥 주목작의 작은 증가량(+1~+2)이나 평점 변동은 신호보다 노이즈에
+    가까울 수 있습니다 — 데이터가 쌓이는 대로 계속 갱신합니다.
+  </p>
+
+  <div class="section side-mega">
+    <div class="section-head">
+      <span class="section-tag tag-mega">MEGA HIT</span>
+      <span class="section-title">이미 자리잡은 대형 타이틀</span>
+    </div>
+    <div class="section-note">누적 리뷰 1,000개 이상 · 리뷰 증가량 순</div>
+    <div class="rank-table">
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">01</span>
+          <span class="rank-name">Palworld<small>452,000+ 누적 리뷰 · 긍정 94.4%</small></span>
+          <span class="rank-stat stat-up">+309</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Survival Craft</span><span class="tag-chip">Co-op</span><span class="tag-chip">Online Co-op</span></div>
+        <div class="why positive"><b>왜</b>"Ark에 Pokémon을 섞은 느낌" — 크리처 포획+베이스 건설 루프를 향한 꾸준한 호평이 계속되는 중. 논란 없이 순수 입소문으로 우상향.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">02</span>
+          <span class="rank-name">7 Days to Die<small>404,000+ 누적 리뷰 · 긍정 86.8%</small></span>
+          <span class="rank-stat stat-up">+120</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Survival</span><span class="tag-chip">Zombie</span><span class="tag-chip">Co-op</span><span class="tag-chip">LAN Co-op</span></div>
+        <div class="why negative"><b>왜 (주의)</b>리뷰량은 늘지만 최근 도움순 상위는 전부 부정 — 개발사가 인기 콘텐츠 제작자(JaWoodle)와 갈등을 빚은 데 대한 리뷰 폭탄. 볼륨 증가와 평판 악화가 동시에 벌어지는 케이스.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">03</span>
+          <span class="rank-name">Scrap Mechanic<small>119,000+ 누적 리뷰 · 긍정 92.0%</small></span>
+          <span class="rank-stat stat-up">+53</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Building</span><span class="tag-chip">Physics</span><span class="tag-chip">Co-op</span></div>
+        <div class="why mixed"><b>왜</b>"Chapter 2 / 1.0" 업데이트 예고에 팬들이 들썩. 물리 기반 건축 자체는 호평 일색이지만 "업데이트가 너무 뜸하다"는 불만도 꾸준.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">04</span>
+          <span class="rank-name">Garry's Mod<small>1,250,000+ 누적 리뷰 · 긍정 96.9%</small></span>
+          <span class="rank-stat stat-up">+51</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Sandbox</span><span class="tag-chip">Simulation</span><span class="tag-chip">Multi-player</span></div>
+        <div class="why positive"><b>왜</b>"어릴 때부터 하던 게임을 다 커서도" 식 노스탤지어 리뷰가 압도적. 친구와의 코옵 + 워크숍 모드 자유도가 핵심 셀링 포인트.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">05</span>
+          <span class="rank-name">Project Zomboid<small>461,000+ 누적 리뷰 · 긍정 94.0%</small></span>
+          <span class="rank-stat stat-up">+48</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Survival</span><span class="tag-chip">RPG</span><span class="tag-chip">Early Access</span></div>
+        <div class="why mixed"><b>왜</b>플레이어들은 "죽어도 계속하게 되는" 하드코어 퍼머데스 루프를 극찬 (친구랑 하면 더 좋다는 의견 다수). 다만 도움순 최상위엔 개발사 인력 구조조정을 우려하는 장문 리뷰도 있음 — 지켜볼 이슈.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">06</span>
+          <span class="rank-name">Terraria<small>1,539,000+ 누적 리뷰 · 긍정 97.4%</small></span>
+          <span class="rank-stat stat-up">+44</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Sandbox</span><span class="tag-chip">Survival</span><span class="tag-chip">Co-op</span></div>
+        <div class="why positive"><b>왜</b>10년 넘게 재접속한다는 장기 유저 후기가 압도적. 방대한 진행 콘텐츠와 "친구랑 하면 더 재밌다"는 코멘트가 반복 — 논란 없이 꾸준한 스테디셀러.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">07</span>
+          <span class="rank-name">Rust<small>1,383,000+ 누적 리뷰 · 긍정 86.8%</small></span>
+          <span class="rank-stat stat-up">+36</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Survival</span><span class="tag-chip">PvP</span><span class="tag-chip">Online Co-op</span></div>
+        <div class="why mixed"><b>왜</b>배신·약탈을 밈으로 승화시킨 후기가 대다수 — 가혹한 PvP인데도 "밤새 했다"는 중독성 인정. 최근 캐릭터 모델 변경에 대한 불만이 소수 있음.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">08</span>
+          <span class="rank-name">Schedule I<small>309,000+ 누적 리뷰 · 긍정 97.8%</small></span>
+          <span class="rank-stat stat-up">+33</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Simulation</span><span class="tag-chip">Co-op</span><span class="tag-chip">Early Access</span></div>
+        <div class="why mixed"><b>왜</b>1인 개발 마약왕 시뮬레이터가 대박 났는데, 흥행 규모에 비해 "업데이트가 너무 얕고 느리다"는 장문 비판이 도움순 상위에 다수 — 성공이 콘텐츠 속도를 앞지른 케이스.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section side-emerging">
+    <div class="section-head">
+      <span class="section-tag tag-emerging">EMERGING</span>
+      <span class="section-title">신흥 주목작</span>
+    </div>
+    <div class="section-note">누적 리뷰 10~1,000개 · 리뷰 증가량 순</div>
+    <div class="rank-table">
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">01</span>
+          <span class="rank-name">Sonder<small>773 누적 리뷰 · 긍정 90.3%</small></span>
+          <span class="rank-stat stat-up-teal">+2</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Casual</span><span class="tag-chip">Free To Play</span><span class="tag-chip">Online Co-op</span><span class="tag-chip">Split Screen</span></div>
+        <div class="why positive"><b>왜</b>친구/연인과 47분 만에 클리어했다는 후기가 반복 — 짧고 감성적인 코옵 퍼즐. "무료인데 이 정도라니" 톤의 호평, 단점은 "더 길었으면" 뿐.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">02</span>
+          <span class="rank-name">Welcome to Dustown<small>794 누적 리뷰 · 긍정 50.9%</small></span>
+          <span class="rank-stat stat-up-teal">+2</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Horror</span><span class="tag-chip">Massively Multiplayer</span><span class="tag-chip">Free To Play</span></div>
+        <div class="why negative"><b>왜</b>긍정률 50%가 실제로 반반 갈림 — 코옵 호러 컨셉은 좋다는 의견도 있지만 최적화 부족, 버그, "Q로 걷기" 같은 조작 미숙 불만이 반복적으로 상위 노출.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">03</span>
+          <span class="rank-name">Narvas<small>387 누적 리뷰 · 긍정 43.2%</small></span>
+          <span class="rank-stat stat-up-teal">+1</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Platformer</span><span class="tag-chip">Indie</span></div>
+        <div class="why negative"><b>왜</b>조작감 관련 불만이 도움순 상위를 독식 — 점프 거리 제한, 텔레포트 강제, 판정 불공평 지적이 반복. 무료 배포임에도 비추천이 우세.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">04</span>
+          <span class="rank-name">Prehistoric Hunt<small>765 누적 리뷰 · 긍정 83.3%</small></span>
+          <span class="rank-stat stat-up-teal">+1</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Hunting</span><span class="tag-chip">Simulation</span><span class="tag-chip">Early Access</span></div>
+        <div class="why mixed"><b>왜</b>공룡 사냥 코옵 컨셉 자체는 긍정적이나, 상위 리뷰들은 "이동이 느리다", "총알이 안 먹힌다" 등 6년째 Early Access인 게임치고 다듬어지지 않았다는 지적이 많음.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">05</span>
+          <span class="rank-name">Handy Harry's Haunted House Services<small>745 누적 리뷰 · 긍정 89.9%</small></span>
+          <span class="rank-stat stat-up-teal">+1</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Indie</span><span class="tag-chip">Early Access</span></div>
+        <div class="why thin"><b>왜 (데이터 부족)</b>도움순 상위 리뷰가 한 줄짜리("poop")뿐 — 표본이 너무 적어 이유를 판단하기 어려움. 리뷰가 더 쌓이면 재평가 필요.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">06</span>
+          <span class="rank-name">Bulanci<small>677 누적 리뷰 · 긍정 67.4%</small></span>
+          <span class="rank-stat stat-up-teal">+1</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Casual</span><span class="tag-chip">Split Screen Co-op</span></div>
+        <div class="why thin"><b>왜 (데이터 부족)</b>도움순 리뷰 자체가 한두 줄짜리 감탄사 수준("found this!", "lebo")뿐이라 이유를 특정하기 어려움.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">07</span>
+          <span class="rank-name">Garbanzo Quest<small>666 누적 리뷰 · 긍정 98.1%</small></span>
+          <span class="rank-stat stat-up-teal">+1</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Platformer</span><span class="tag-chip">Split Screen Co-op</span></div>
+        <div class="why positive"><b>왜</b>"슈퍼 마리오 월드에 대한 러브레터" 같은 극찬 일색 — 밸런스 잘 잡힌 난이도, 숨겨진 비밀 요소, 폭넓은 반응이 반복. 이번 리스트 중 가장 잡음 없이 순수하게 좋은 평가.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-top">
+          <span class="rank-num">08</span>
+          <span class="rank-name">CantEscapeTheBackrooms<small>257 누적 리뷰 · 긍정 59.5%</small></span>
+          <span class="rank-stat stat-up-teal">+1</span>
+        </div>
+        <div class="tags"><span class="tag-chip">Horror</span><span class="tag-chip">Free To Play</span></div>
+        <div class="why negative"><b>왜</b>코옵 태그로 잡혔지만 정작 "멀티플레이어가 출시 이후 계속 '곧 추가' 상태"라는 불만이 반복 — 태그와 실제 기능이 어긋난 케이스로, 데이터만 봐선 안 보이는 함정.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ad-slot: mid-page -->
+  <div class="ad-slot">광고 영역 (준비 중)</div>
+
+  <div class="section side-rating">
+    <div class="section-head">
+      <span class="section-tag tag-rating">RATING MOVERS</span>
+      <span class="section-title">평점 급변동</span>
+    </div>
+    <div class="section-note">신규 리뷰 20개 이상 게임 중 긍정 비율 변동폭 순 — 이번 에디션엔 유의미한 변동 없음</div>
+    <div class="rank-table">
+      <div class="rank-row">
+        <span class="rank-num">01</span>
+        <span class="rank-name">7 Days to Die</span>
+        <span class="rank-stat stat-down">-0.03pp</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-num">02</span>
+        <span class="rank-name">Garry's Mod</span>
+        <span class="rank-stat stat-flat">±0.00pp</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-num">03</span>
+        <span class="rank-name">Terraria</span>
+        <span class="rank-stat stat-flat">±0.00pp</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-num">04</span>
+        <span class="rank-name">Project Zomboid</span>
+        <span class="rank-stat stat-flat">±0.00pp</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-num">05</span>
+        <span class="rank-name">Rust</span>
+        <span class="rank-stat stat-flat">±0.00pp</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subscribe">
+    <div class="subscribe-text"><b>뉴스레터 준비 중</b>매주 이 페이지 내용을 이메일로도 받아볼 수 있게 준비하고 있습니다.</div>
+    <div class="subscribe-cta">곧 오픈</div>
+  </div>
+
+  <div class="disclosure">
+    <b>왜 아직 베타인가</b> — 스냅샷이 07-25, 07-26 이틀뿐이라 위 수치는 트레일링 7일이 아니라
+    사실상 하루 증가량입니다. 신흥 주목작의 +1~+2, 평점 변동의 ±0.0pp는 아직 신호가 아니라
+    노이즈에 가깝습니다. 데이터가 쌓이는 대로 계속 갱신합니다.<br><br>
+    <b>태그/코멘트 출처</b> — 장르·태그는 SteamSpy/Steam 공개 API 데이터. "왜" 코멘트는
+    Steam 리뷰 원문(도움순 상위)을 직접 읽고 요약한 것입니다.
+  </div>
+
+  <footer>
+    <span>CoopPulse — 코옵 인디게임 리뷰 트래커</span>
+    <span><a href="https://github.com/owsjtld/CoopPulse">GitHub</a></span>
+  </footer>
+</div>
+</body>
+</html>

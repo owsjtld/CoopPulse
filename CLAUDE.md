@@ -11,7 +11,7 @@ Steam 리뷰 증가량 기반으로 "이번 주 뜨는 코옵 인디게임"을 �
 
 ### 현재 상태
 <!-- STATUS:START -->
-2026-07-26 01:18 기준 추적 게임 4005개 (SteamSpy Co-op 태그 로컬 전량 스캔 진행 중 — 남은 후보는 다음 로컬/수동 실행에서 이어서 처리).
+2026-07-26 15:03 기준 추적 게임 4047개 (SteamSpy Co-op 태그 로컬 전량 스캔 진행 중 — 남은 후보는 다음 로컬/수동 실행에서 이어서 처리).
 <!-- STATUS:END -->
 
 ### 단계별 계획
@@ -31,7 +31,7 @@ Steam 리뷰 증가량 기반으로 "이번 주 뜨는 코옵 인디게임"을 �
 python -m venv .venv && ".venv/Scripts/python.exe" -m pip install -r requirements.txt
 python crawler/discover_games.py   # 추적 대상 게임 등록/갱신 (가끔)
 python crawler/daily_snapshot.py   # 오늘자 리뷰 스냅샷 저장 (매일)
-python crawler/top5.py             # 최근 7일 리뷰 증가량 Top 5
+python crawler/top5.py             # 메가 히트 / 신흥 주목작 / 평점 급변동 top5 (최근 7일)
 ```
 
 ## Git 워크플로우 (중요)
