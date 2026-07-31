@@ -62,6 +62,25 @@
   }
   .wordmark span { color: var(--teal); }
 
+  .masthead-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lang-toggle {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 4px 9px;
+    cursor: pointer;
+  }
+  .lang-toggle:hover { color: var(--ink); border-color: var(--teal-dim); }
+
   .edition-stamp {
     font-family: var(--mono);
     font-size: 12px;
@@ -309,99 +328,149 @@
 <div class="page">
   <div class="masthead">
     <div class="wordmark">COOP<span>PULSE</span></div>
-    <div class="edition-stamp">2026-07-31 기준<br>추적 중: 4,047개</div>
+    <div class="masthead-right">
+      <button type="button" id="langToggle" class="lang-toggle" onclick="toggleLang()">EN</button>
+      <div class="edition-stamp">
+        <span class="i18n-ko">2026-07-31 기준<br>추적 중: 4,047개</span>
+        <span class="i18n-en" hidden>As of 2026-07-31<br>Tracking: 4,047 games</span>
+      </div>
+    </div>
   </div>
 
-  <div class="beta-flag">BETA — 6일차 데이터, 트레일링 7일 도달 임박</div>
+  <div class="beta-flag">
+    <span class="i18n-ko">BETA — 6일차 데이터, 트레일링 7일 도달 임박</span>
+    <span class="i18n-en" hidden>BETA — Day 6 of data, trailing 7-day window almost complete</span>
+  </div>
 
   <!-- ad-slot: top banner. AdSense 등 실제 광고 스크립트는 계정 발급 후 이 자리에 삽입 -->
-  <div class="ad-slot">광고 영역 (준비 중)</div>
+  <div class="ad-slot i18n-ko">광고 영역 (준비 중)</div>
+  <div class="ad-slot i18n-en" hidden>Ad slot (coming soon)</div>
 
-  <p class="intro">이번 주 코옵 인디게임 시장에서 리뷰가 움직인 타이틀들.</p>
-  <p class="intro-sub">
+  <p class="intro i18n-ko">이번 주 코옵 인디게임 시장에서 리뷰가 움직인 타이틀들.</p>
+  <p class="intro i18n-en" hidden>Titles moving the needle in the co-op indie game market this week.</p>
+  <p class="intro-sub i18n-ko">
     07-25 → 07-30, 6일치 스냅샷 누적 기준입니다 (목표 트레일링 7일 중 6일차). 대형 타이틀
     신호는 이제 꽤 신뢰할 만하지만, 신흥 주목작의 +5~+8 수준 증가량은 여전히 작은 표본이라
     노이즈 가능성을 감안해서 봐주세요.
+  </p>
+  <p class="intro-sub i18n-en" hidden>
+    Based on 6 days of accumulated snapshots (07-25 → 07-30), day 6 of a target trailing
+    7-day window. Signal for established titles is fairly reliable now, but the +5-8 range
+    for Emerging Picks is still a small sample — treat it with some noise-skepticism.
   </p>
 
   <div class="section side-mega">
     <div class="section-head">
       <span class="section-tag tag-mega">MEGA HIT</span>
-      <span class="section-title">이미 자리잡은 대형 타이틀</span>
+      <span class="section-title i18n-ko">이미 자리잡은 대형 타이틀</span>
+      <span class="section-title i18n-en" hidden>Established Titles</span>
     </div>
-    <div class="section-note">누적 리뷰 1,000개 이상 · 리뷰 증가량 순</div>
+    <div class="section-note i18n-ko">누적 리뷰 1,000개 이상 · 리뷰 증가량 순</div>
+    <div class="section-note i18n-en" hidden>1,000+ cumulative reviews · ranked by review growth</div>
     <div class="rank-table">
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">01</span>
-          <span class="rank-name">Palworld<small>462,000+ 누적 리뷰 · 긍정 94.4%</small></span>
+          <span class="rank-name">Palworld<small>
+            <span class="i18n-ko">462,000+ 누적 리뷰 · 긍정 94.4%</span>
+            <span class="i18n-en" hidden>462,000+ reviews · 94.4% positive</span>
+          </small></span>
           <span class="rank-stat stat-up">+8,985</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Adventure</span><span class="tag-chip">RPG</span></div>
-        <div class="why positive"><b>왜</b>"Ark에 Pokémon을 섞은 느낌" — 크리처 포획+베이스 건설 루프를 향한 꾸준한 호평이 계속되는 중. 논란 없이 순수 입소문으로 우상향.</div>
+        <div class="why positive i18n-ko"><b>왜</b>"Ark에 Pokémon을 섞은 느낌" — 크리처 포획+베이스 건설 루프를 향한 꾸준한 호평이 계속되는 중. 논란 없이 순수 입소문으로 우상향.</div>
+        <div class="why positive i18n-en" hidden><b>Why</b>"Feels like Ark mixed with Pokémon" — steady praise for the creature-capture + base-building loop continues. Pure organic word-of-mouth growth, no controversy.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">02</span>
-          <span class="rank-name">Project Zomboid<small>464,000+ 누적 리뷰 · 긍정 94.0%</small></span>
+          <span class="rank-name">Project Zomboid<small>
+            <span class="i18n-ko">464,000+ 누적 리뷰 · 긍정 94.0%</span>
+            <span class="i18n-en" hidden>464,000+ reviews · 94.0% positive</span>
+          </small></span>
           <span class="rank-stat stat-up">+2,348</span>
         </div>
         <div class="tags"><span class="tag-chip">Survival</span><span class="tag-chip">RPG</span><span class="tag-chip">Early Access</span></div>
-        <div class="why mixed"><b>왜</b>플레이어들은 "죽어도 계속하게 되는" 하드코어 퍼머데스 루프를 극찬 (친구랑 하면 더 좋다는 의견 다수). 다만 도움순 최상위엔 개발사 인력 구조조정을 우려하는 장문 리뷰도 있음 — 지켜볼 이슈.</div>
+        <div class="why mixed i18n-ko"><b>왜</b>플레이어들은 "죽어도 계속하게 되는" 하드코어 퍼머데스 루프를 극찬 (친구랑 하면 더 좋다는 의견 다수). 다만 도움순 최상위엔 개발사 인력 구조조정을 우려하는 장문 리뷰도 있음 — 지켜볼 이슈.</div>
+        <div class="why mixed i18n-en" hidden><b>Why</b>Players rave about the hardcore permadeath loop that "keeps you coming back even after you die" (many say it's even better with friends). That said, a top-voted long-form review raises concern about recent dev layoffs — worth watching.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">03</span>
-          <span class="rank-name">Garry's Mod<small>1,254,000+ 누적 리뷰 · 긍정 96.9%</small></span>
+          <span class="rank-name">Garry's Mod<small>
+            <span class="i18n-ko">1,254,000+ 누적 리뷰 · 긍정 96.9%</span>
+            <span class="i18n-en" hidden>1,254,000+ reviews · 96.9% positive</span>
+          </small></span>
           <span class="rank-stat stat-up">+1,553</span>
         </div>
         <div class="tags"><span class="tag-chip">Sandbox</span><span class="tag-chip">Simulation</span><span class="tag-chip">Multi-player</span></div>
-        <div class="why positive"><b>왜</b>"어릴 때부터 하던 게임을 다 커서도" 식 노스탤지어 리뷰가 압도적. 친구와의 코옵 + 워크숍 모드 자유도가 핵심 셀링 포인트.</div>
+        <div class="why positive i18n-ko"><b>왜</b>"어릴 때부터 하던 게임을 다 커서도" 식 노스탤지어 리뷰가 압도적. 친구와의 코옵 + 워크숍 모드 자유도가 핵심 셀링 포인트.</div>
+        <div class="why positive i18n-en" hidden><b>Why</b>Overwhelmingly nostalgia-driven reviews — "played this as a kid, still playing as an adult." Co-op with friends plus Workshop mod freedom are the core selling points.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">04</span>
-          <span class="rank-name">Rust<small>1,385,000+ 누적 리뷰 · 긍정 86.8%</small></span>
+          <span class="rank-name">Rust<small>
+            <span class="i18n-ko">1,385,000+ 누적 리뷰 · 긍정 86.8%</span>
+            <span class="i18n-en" hidden>1,385,000+ reviews · 86.8% positive</span>
+          </small></span>
           <span class="rank-stat stat-up">+1,381</span>
         </div>
         <div class="tags"><span class="tag-chip">Survival</span><span class="tag-chip">PvP</span><span class="tag-chip">Online Co-op</span></div>
-        <div class="why mixed"><b>왜</b>배신·약탈을 밈으로 승화시킨 후기가 대다수 — 가혹한 PvP인데도 "밤새 했다"는 중독성 인정. 최근 캐릭터 모델 변경에 대한 불만이 소수 있음.</div>
+        <div class="why mixed i18n-ko"><b>왜</b>배신·약탈을 밈으로 승화시킨 후기가 대다수 — 가혹한 PvP인데도 "밤새 했다"는 중독성 인정. 최근 캐릭터 모델 변경에 대한 불만이 소수 있음.</div>
+        <div class="why mixed i18n-en" hidden><b>Why</b>Most reviews turn betrayal and raiding into a running joke — brutal PvP, yet plenty admit they "stayed up all night" playing. A minority complain about a recent character model change.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">05</span>
-          <span class="rank-name">Terraria<small>1,541,000+ 누적 리뷰 · 긍정 97.4%</small></span>
+          <span class="rank-name">Terraria<small>
+            <span class="i18n-ko">1,541,000+ 누적 리뷰 · 긍정 97.4%</span>
+            <span class="i18n-en" hidden>1,541,000+ reviews · 97.4% positive</span>
+          </small></span>
           <span class="rank-stat stat-up">+1,247</span>
         </div>
         <div class="tags"><span class="tag-chip">Sandbox</span><span class="tag-chip">Survival</span><span class="tag-chip">Co-op</span></div>
-        <div class="why positive"><b>왜</b>10년 넘게 재접속한다는 장기 유저 후기가 압도적. 방대한 진행 콘텐츠와 "친구랑 하면 더 재밌다"는 코멘트가 반복 — 논란 없이 꾸준한 스테디셀러.</div>
+        <div class="why positive i18n-ko"><b>왜</b>10년 넘게 재접속한다는 장기 유저 후기가 압도적. 방대한 진행 콘텐츠와 "친구랑 하면 더 재밌다"는 코멘트가 반복 — 논란 없이 꾸준한 스테디셀러.</div>
+        <div class="why positive i18n-en" hidden><b>Why</b>Overwhelmingly long-term players who've kept coming back for 10+ years. Vast amounts of progression content and repeated "more fun with friends" comments — a steady, controversy-free classic.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">06</span>
-          <span class="rank-name">Escape the Backrooms<small>158,000+ 누적 리뷰 · 긍정 90.0%</small></span>
+          <span class="rank-name">Escape the Backrooms<small>
+            <span class="i18n-ko">158,000+ 누적 리뷰 · 긍정 90.0%</span>
+            <span class="i18n-en" hidden>158,000+ reviews · 90.0% positive</span>
+          </small></span>
           <span class="rank-stat stat-up">+893</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Indie</span><span class="tag-chip">Co-op</span><span class="tag-chip">Online Co-op</span></div>
-        <div class="why mixed"><b>왜</b>친구와 함께하는 리미널 공포 컨셉에 대한 애정이 여전하지만("리미널한 게 리미널하다"는 밈 리뷰까지 나올 정도), 정작 약속했던 버그 수정·VR 지원 대신 크로스플랫폼 대응에만 집중하면서 PC 모딩 생태계가 무너졌다는 장문 비판이 상위에 있음.</div>
+        <div class="why mixed i18n-ko"><b>왜</b>친구와 함께하는 리미널 공포 컨셉에 대한 애정이 여전하지만("리미널한 게 리미널하다"는 밈 리뷰까지 나올 정도), 정작 약속했던 버그 수정·VR 지원 대신 크로스플랫폼 대응에만 집중하면서 PC 모딩 생태계가 무너졌다는 장문 비판이 상위에 있음.</div>
+        <div class="why mixed i18n-en" hidden><b>Why</b>Love for the co-op liminal-horror concept remains strong (even meme reviews like "it's so liminal" exist), but a top-voted long-form review argues the dev focused entirely on cross-platform support instead of promised bug fixes/VR, collapsing the PC modding ecosystem.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">07</span>
-          <span class="rank-name">Scrap Mechanic<small>120,000+ 누적 리뷰 · 긍정 92.0%</small></span>
+          <span class="rank-name">Scrap Mechanic<small>
+            <span class="i18n-ko">120,000+ 누적 리뷰 · 긍정 92.0%</span>
+            <span class="i18n-en" hidden>120,000+ reviews · 92.0% positive</span>
+          </small></span>
           <span class="rank-stat stat-up">+889</span>
         </div>
         <div class="tags"><span class="tag-chip">Building</span><span class="tag-chip">Physics</span><span class="tag-chip">Co-op</span></div>
-        <div class="why mixed"><b>왜</b>"Chapter 2 / 1.0" 업데이트 예고에 팬들이 들썩. 물리 기반 건축 자체는 호평 일색이지만 "업데이트가 너무 뜸하다"는 불만도 꾸준.</div>
+        <div class="why mixed i18n-ko"><b>왜</b>"Chapter 2 / 1.0" 업데이트 예고에 팬들이 들썩. 물리 기반 건축 자체는 호평 일색이지만 "업데이트가 너무 뜸하다"는 불만도 꾸준.</div>
+        <div class="why mixed i18n-en" hidden><b>Why</b>Fans are buzzing over the teased "Chapter 2 / 1.0" update. The physics-based building itself gets universal praise, but complaints about infrequent updates persist.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">08</span>
-          <span class="rank-name">Schedule I<small>309,000+ 누적 리뷰 · 긍정 97.8%</small></span>
+          <span class="rank-name">Schedule I<small>
+            <span class="i18n-ko">309,000+ 누적 리뷰 · 긍정 97.8%</span>
+            <span class="i18n-en" hidden>309,000+ reviews · 97.8% positive</span>
+          </small></span>
           <span class="rank-stat stat-up">+658</span>
         </div>
         <div class="tags"><span class="tag-chip">Simulation</span><span class="tag-chip">Co-op</span><span class="tag-chip">Early Access</span></div>
-        <div class="why mixed"><b>왜</b>1인 개발 마약왕 시뮬레이터가 대박 났는데, 흥행 규모에 비해 "업데이트가 너무 얕고 느리다"는 장문 비판이 도움순 상위에 다수 — 성공이 콘텐츠 속도를 앞지른 케이스.</div>
+        <div class="why mixed i18n-ko"><b>왜</b>1인 개발 마약왕 시뮬레이터가 대박 났는데, 흥행 규모에 비해 "업데이트가 너무 얕고 느리다"는 장문 비판이 도움순 상위에 다수 — 성공이 콘텐츠 속도를 앞지른 케이스.</div>
+        <div class="why mixed i18n-en" hidden><b>Why</b>A solo-dev drug-kingpin sim that blew up — but relative to its success, many top-voted reviews criticize updates as "too shallow and slow." A case of success outpacing content velocity.</div>
       </div>
     </div>
   </div>
@@ -409,149 +478,208 @@
   <div class="section side-emerging">
     <div class="section-head">
       <span class="section-tag tag-emerging">EMERGING</span>
-      <span class="section-title">신흥 주목작</span>
+      <span class="section-title i18n-ko">신흥 주목작</span>
+      <span class="section-title i18n-en" hidden>Emerging Picks</span>
     </div>
-    <div class="section-note">누적 리뷰 10~1,000개 · 리뷰 증가량 순</div>
+    <div class="section-note i18n-ko">누적 리뷰 10~1,000개 · 리뷰 증가량 순</div>
+    <div class="section-note i18n-en" hidden>10-1,000 cumulative reviews · ranked by review growth</div>
     <div class="rank-table">
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">01</span>
-          <span class="rank-name">Sandwich Simulator<small>1,001 누적 리뷰 · 긍정 77.9%</small></span>
+          <span class="rank-name">Sandwich Simulator<small>
+            <span class="i18n-ko">1,001 누적 리뷰 · 긍정 77.9%</span>
+            <span class="i18n-en" hidden>1,001 reviews · 77.9% positive</span>
+          </small></span>
           <span class="rank-stat stat-up-teal">+8</span>
         </div>
         <div class="tags"><span class="tag-chip">Casual</span><span class="tag-chip">Simulation</span><span class="tag-chip">Co-op</span><span class="tag-chip">Online Co-op</span></div>
-        <div class="why mixed"><b>왜</b>"친구랑 하면 재밌다"는 반응이 많지만, 혼자 하기엔 주문이 너무 몰아친다는 불만과 문에 끼여 1시간 넘게 갇혔다는 버그 제보가 반복됨.</div>
+        <div class="why mixed i18n-ko"><b>왜</b>"친구랑 하면 재밌다"는 반응이 많지만, 혼자 하기엔 주문이 너무 몰아친다는 불만과 문에 끼여 1시간 넘게 갇혔다는 버그 제보가 반복됨.</div>
+        <div class="why mixed i18n-en" hidden><b>Why</b>Many say it's "fun with friends," but solo players complain orders come too fast to handle, and there are repeated bug reports of getting stuck in a door for over an hour.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">02</span>
-          <span class="rank-name">Killer Queen Black<small>597 누적 리뷰 · 긍정 91.6%</small></span>
+          <span class="rank-name">Killer Queen Black<small>
+            <span class="i18n-ko">597 누적 리뷰 · 긍정 91.6%</span>
+            <span class="i18n-en" hidden>597 reviews · 91.6% positive</span>
+          </small></span>
           <span class="rank-stat stat-up-teal">+7</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Sports</span><span class="tag-chip">Co-op</span><span class="tag-chip">Free To Play</span></div>
-        <div class="why positive"><b>왜</b>7/18에 무료 전환 + 온라인 멀티 재개가 맞물리며 재유입 후기가 몰림. "배울수록 깊어지는" 4v4 팀플레이 밸런스를 극찬하는 반응 다수.</div>
+        <div class="why positive i18n-ko"><b>왜</b>7/18에 무료 전환 + 온라인 멀티 재개가 맞물리며 재유입 후기가 몰림. "배울수록 깊어지는" 4v4 팀플레이 밸런스를 극찬하는 반응 다수.</div>
+        <div class="why positive i18n-en" hidden><b>Why</b>Going free-to-play on 7/18 alongside restored online multiplayer triggered a wave of returning-player reviews. Many praise the "deeper the more you learn" 4v4 team balance.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">03</span>
-          <span class="rank-name">Tank Team<small>970 누적 리뷰 · 긍정 90.9%</small></span>
+          <span class="rank-name">Tank Team<small>
+            <span class="i18n-ko">970 누적 리뷰 · 긍정 90.9%</span>
+            <span class="i18n-en" hidden>970 reviews · 90.9% positive</span>
+          </small></span>
           <span class="rank-stat stat-up-teal">+7</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Casual</span><span class="tag-chip">Co-op</span><span class="tag-chip">Free To Play</span></div>
-        <div class="why mixed"><b>왜</b>"친구랑 하면 재밌다"와 "혼자 하면 별로다"가 정확히 갈리는 전형적인 코옵 편향 반응. 버그로 인한 불합리한 피격 판정 불만도 상위에 있음.</div>
+        <div class="why mixed i18n-ko"><b>왜</b>"친구랑 하면 재밌다"와 "혼자 하면 별로다"가 정확히 갈리는 전형적인 코옵 편향 반응. 버그로 인한 불합리한 피격 판정 불만도 상위에 있음.</div>
+        <div class="why mixed i18n-en" hidden><b>Why</b>A textbook co-op-bias split between "fun with friends" and "not great solo." Complaints about unfair hit detection from bugs also rank high.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">04</span>
-          <span class="rank-name">Sonder<small>778 누적 리뷰 · 긍정 90.4%</small></span>
+          <span class="rank-name">Sonder<small>
+            <span class="i18n-ko">778 누적 리뷰 · 긍정 90.4%</span>
+            <span class="i18n-en" hidden>778 reviews · 90.4% positive</span>
+          </small></span>
           <span class="rank-stat stat-up-teal">+7</span>
         </div>
         <div class="tags"><span class="tag-chip">Casual</span><span class="tag-chip">Free To Play</span><span class="tag-chip">Online Co-op</span><span class="tag-chip">Split Screen</span></div>
-        <div class="why positive"><b>왜</b>친구/연인과 47분 만에 클리어했다는 후기가 반복 — 짧고 감성적인 코옵 퍼즐. "무료인데 이 정도라니" 톤의 호평, 단점은 "더 길었으면" 뿐.</div>
+        <div class="why positive i18n-ko"><b>왜</b>친구/연인과 47분 만에 클리어했다는 후기가 반복 — 짧고 감성적인 코옵 퍼즐. "무료인데 이 정도라니" 톤의 호평, 단점은 "더 길었으면" 뿐.</div>
+        <div class="why positive i18n-en" hidden><b>Why</b>Repeated reviews of clearing it in 47 minutes with a friend or partner — a short, emotional co-op puzzle game. Praise along the lines of "can't believe this is free," with the only complaint being "wish it were longer."</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">05</span>
-          <span class="rank-name">Backrooms: Extractions<small>752 누적 리뷰 · 긍정 73.0%</small></span>
+          <span class="rank-name">Backrooms: Extractions<small>
+            <span class="i18n-ko">752 누적 리뷰 · 긍정 73.0%</span>
+            <span class="i18n-en" hidden>752 reviews · 73.0% positive</span>
+          </small></span>
           <span class="rank-stat stat-up-teal">+7</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Adventure</span><span class="tag-chip">Co-op</span><span class="tag-chip">Early Access</span></div>
-        <div class="why negative"><b>왜</b>분위기는 좋다는 평이 있지만, 몬스터가 다운된 팀원 곁을 떠나지 않아 구조가 사실상 불가능하다는 불만이 도움순 최상위를 독식 — 코옵 핵심 기능인 "부활"이 망가졌다는 지적.</div>
+        <div class="why negative i18n-ko"><b>왜</b>분위기는 좋다는 평이 있지만, 몬스터가 다운된 팀원 곁을 떠나지 않아 구조가 사실상 불가능하다는 불만이 도움순 최상위를 독식 — 코옵 핵심 기능인 "부활"이 망가졌다는 지적.</div>
+        <div class="why negative i18n-en" hidden><b>Why</b>Some praise the atmosphere, but the top-voted complaints all say monsters camp downed teammates, making rescue effectively impossible — reviewers say a core co-op mechanic, reviving, is broken.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">06</span>
-          <span class="rank-name">Hidden in Plain Sight<small>948 누적 리뷰 · 긍정 99.1%</small></span>
+          <span class="rank-name">Hidden in Plain Sight<small>
+            <span class="i18n-ko">948 누적 리뷰 · 긍정 99.1%</span>
+            <span class="i18n-en" hidden>948 reviews · 99.1% positive</span>
+          </small></span>
           <span class="rank-stat stat-up-teal">+5</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Casual</span><span class="tag-chip">Split Screen Co-op</span></div>
-        <div class="why positive"><b>왜</b>13년째 사랑받는 로컬 파티 게임이라는 장기 팬 후기가 압도적. 마침 온라인 모드 업데이트 예고가 겹치며 재조명되는 분위기.</div>
+        <div class="why positive i18n-ko"><b>왜</b>13년째 사랑받는 로컬 파티 게임이라는 장기 팬 후기가 압도적. 마침 온라인 모드 업데이트 예고가 겹치며 재조명되는 분위기.</div>
+        <div class="why positive i18n-en" hidden><b>Why</b>Overwhelmingly long-time-fan reviews for a beloved 13-year-old local party game. Renewed attention coincides with a teased online-mode update.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">07</span>
-          <span class="rank-name">Welcome to Dustown<small>797 누적 리뷰 · 긍정 50.8%</small></span>
+          <span class="rank-name">Welcome to Dustown<small>
+            <span class="i18n-ko">797 누적 리뷰 · 긍정 50.8%</span>
+            <span class="i18n-en" hidden>797 reviews · 50.8% positive</span>
+          </small></span>
           <span class="rank-stat stat-up-teal">+5</span>
         </div>
         <div class="tags"><span class="tag-chip">Horror</span><span class="tag-chip">Massively Multiplayer</span><span class="tag-chip">Free To Play</span></div>
-        <div class="why negative"><b>왜</b>긍정률 50%가 실제로 반반 갈림 — 코옵 호러 컨셉은 좋다는 의견도 있지만 최적화 부족, 버그, "Q로 걷기" 같은 조작 미숙 불만이 반복적으로 상위 노출.</div>
+        <div class="why negative i18n-ko"><b>왜</b>긍정률 50%가 실제로 반반 갈림 — 코옵 호러 컨셉은 좋다는 의견도 있지만 최적화 부족, 버그, "Q로 걷기" 같은 조작 미숙 불만이 반복적으로 상위 노출.</div>
+        <div class="why negative i18n-en" hidden><b>Why</b>The 50% positive rating is a genuine 50/50 split — some like the co-op horror concept, but poor optimization, bugs, and awkward controls (like a "press Q to walk" complaint) dominate top reviews.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">08</span>
-          <span class="rank-name">C.A.S.T. (Chernozem Anomaly Strike Team)<small>828 누적 리뷰 · 긍정 88.8%</small></span>
+          <span class="rank-name">C.A.S.T. (Chernozem Anomaly Strike Team)<small>
+            <span class="i18n-ko">828 누적 리뷰 · 긍정 88.8%</span>
+            <span class="i18n-en" hidden>828 reviews · 88.8% positive</span>
+          </small></span>
           <span class="rank-stat stat-up-teal">+5</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Massively Multiplayer</span><span class="tag-chip">Co-op</span></div>
-        <div class="why positive"><b>왜</b>"버려진 줄 알았는데 사실 꾸준히 업데이트되고 있었다"는 재발견 후기가 특징적 — 코옵 호드슈터로서 완성도는 높다는 평, 다만 일부 유저는 시작 시 크래시를 보고함.</div>
+        <div class="why positive i18n-ko"><b>왜</b>"버려진 줄 알았는데 사실 꾸준히 업데이트되고 있었다"는 재발견 후기가 특징적 — 코옵 호드슈터로서 완성도는 높다는 평, 다만 일부 유저는 시작 시 크래시를 보고함.</div>
+        <div class="why positive i18n-en" hidden><b>Why</b>Notably features "rediscovery" reviews along the lines of "thought it was abandoned, turns out it's been quietly updated." Praised as a polished co-op horde shooter, though some users report crashes on startup.</div>
       </div>
     </div>
   </div>
 
   <!-- ad-slot: mid-page -->
-  <div class="ad-slot">광고 영역 (준비 중)</div>
+  <div class="ad-slot i18n-ko">광고 영역 (준비 중)</div>
+  <div class="ad-slot i18n-en" hidden>Ad slot (coming soon)</div>
 
   <div class="section side-rating">
     <div class="section-head">
       <span class="section-tag tag-rating">RATING MOVERS</span>
-      <span class="section-title">평점 급변동</span>
+      <span class="section-title i18n-ko">평점 급변동</span>
+      <span class="section-title i18n-en" hidden>Rating Movers</span>
     </div>
-    <div class="section-note">6일간 신규 리뷰 20개 이상 게임 중 긍정 비율 변동폭 순 — 이번 주는 전부 하락권</div>
+    <div class="section-note i18n-ko">6일간 신규 리뷰 20개 이상 게임 중 긍정 비율 변동폭 순 — 이번 주는 전부 하락권</div>
+    <div class="section-note i18n-en" hidden>Among games with 20+ new reviews over 6 days, ranked by positive-rating swing — all declines this week</div>
     <div class="rank-table">
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">01</span>
-          <span class="rank-name">Yet Another Zombie Defense HD<small>3,427 누적 리뷰 · 신규 +181</small></span>
+          <span class="rank-name">Yet Another Zombie Defense HD<small>
+            <span class="i18n-ko">3,427 누적 리뷰 · 신규 +181</span>
+            <span class="i18n-en" hidden>3,427 cumulative reviews · +181 new</span>
+          </small></span>
           <span class="rank-stat stat-down">-0.52pp</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Indie</span><span class="tag-chip">Co-op</span><span class="tag-chip">Free To Play</span></div>
-        <div class="why mixed"><b>왜</b>무료 배포로 신규 유입은 늘었지만("공짜치고 나쁘지 않다"는 온건한 호평이 다수) 최고 추천수 리뷰 두 개가 나란히 혹평(250표·208표)이라 긍정률을 끌어내리는 중 — 오래된 F2P 타이틀 특유의 기대치 불일치.</div>
+        <div class="why mixed i18n-ko"><b>왜</b>무료 배포로 신규 유입은 늘었지만("공짜치고 나쁘지 않다"는 온건한 호평이 다수) 최고 추천수 리뷰 두 개가 나란히 혹평(250표·208표)이라 긍정률을 끌어내리는 중 — 오래된 F2P 타이틀 특유의 기대치 불일치.</div>
+        <div class="why mixed i18n-en" hidden><b>Why</b>Going free brought in new players (many mild "not bad for free" reviews), but the two most-upvoted reviews (250 and 208 votes) are both harshly negative, dragging the rating down — a classic expectation mismatch for an older F2P title.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">02</span>
-          <span class="rank-name">GROUND BRANCH<small>24,544 누적 리뷰 · 신규 +107</small></span>
+          <span class="rank-name">GROUND BRANCH<small>
+            <span class="i18n-ko">24,544 누적 리뷰 · 신규 +107</span>
+            <span class="i18n-en" hidden>24,544 cumulative reviews · +107 new</span>
+          </small></span>
           <span class="rank-stat stat-down">-0.29pp</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Simulation</span><span class="tag-chip">Co-op</span></div>
-        <div class="why negative"><b>왜</b>8년의 Early Access 끝에 최근 "1.0" 정식 출시했는데, AI가 여전히 벽 너머로 사격하고 협동 캠페인이 미완성 상태로 나왔다는 장문 혹평이 상위를 독식 — "Ready or Not이 반복되는 느낌"이라는 비교까지 나옴.</div>
+        <div class="why negative i18n-ko"><b>왜</b>8년의 Early Access 끝에 최근 "1.0" 정식 출시했는데, AI가 여전히 벽 너머로 사격하고 협동 캠페인이 미완성 상태로 나왔다는 장문 혹평이 상위를 독식 — "Ready or Not이 반복되는 느낌"이라는 비교까지 나옴.</div>
+        <div class="why negative i18n-en" hidden><b>Why</b>After 8 years in Early Access, its "1.0" launch backfired — top reviews are long-form complaints that AI still shoots through walls and the co-op campaign shipped incomplete, with some even comparing it to Ready or Not's rocky launch.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">03</span>
-          <span class="rank-name">Angels Fall First<small>3,900 누적 리뷰 · 신규 +59</small></span>
+          <span class="rank-name">Angels Fall First<small>
+            <span class="i18n-ko">3,900 누적 리뷰 · 신규 +59</span>
+            <span class="i18n-en" hidden>3,900 cumulative reviews · +59 new</span>
+          </small></span>
           <span class="rank-stat stat-down">-0.27pp</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Simulation</span><span class="tag-chip">Co-op</span></div>
-        <div class="why mixed"><b>왜</b>"Battlefront 2가 Planetside를 만난 느낌"이라는 극찬이 압도적이지만, 최근 재조명되며 유입된 신규 유저 사이에서 "조작감이 낡았다", "버그가 잦다"는 지적도 함께 늘어나는 중.</div>
+        <div class="why mixed i18n-ko"><b>왜</b>"Battlefront 2가 Planetside를 만난 느낌"이라는 극찬이 압도적이지만, 최근 재조명되며 유입된 신규 유저 사이에서 "조작감이 낡았다", "버그가 잦다"는 지적도 함께 늘어나는 중.</div>
+        <div class="why mixed i18n-en" hidden><b>Why</b>Overwhelming praise along the lines of "Battlefront 2 meets Planetside," but the recent wave of newly-arrived players is also driving up complaints about dated controls and frequent bugs.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">04</span>
-          <span class="rank-name">Foxhole<small>52,627 누적 리뷰 · 신규 +143</small></span>
+          <span class="rank-name">Foxhole<small>
+            <span class="i18n-ko">52,627 누적 리뷰 · 신규 +143</span>
+            <span class="i18n-en" hidden>52,627 cumulative reviews · +143 new</span>
+          </small></span>
           <span class="rank-stat stat-down">-0.24pp</span>
         </div>
         <div class="tags"><span class="tag-chip">Action</span><span class="tag-chip">Massively Multiplayer</span><span class="tag-chip">Strategy</span></div>
-        <div class="why negative"><b>왜</b>수백 명이 함께 만드는 진영전이라는 협동 규모 자체는 여전히 극찬받지만, 최근 에임봇·차량 무적 핵 등 핵 사용자 문제가 상위 리뷰를 도배 — 개발사 대응 속도에 대한 불만이 핵심.</div>
+        <div class="why negative i18n-ko"><b>왜</b>수백 명이 함께 만드는 진영전이라는 협동 규모 자체는 여전히 극찬받지만, 최근 에임봇·차량 무적 핵 등 핵 사용자 문제가 상위 리뷰를 도배 — 개발사 대응 속도에 대한 불만이 핵심.</div>
+        <div class="why negative i18n-en" hidden><b>Why</b>The scale of cooperation — hundreds of players building a faction war together — still draws praise, but recent cheaters (aimbot, invincible vehicles) dominate top reviews, with frustration mainly aimed at the dev's response speed.</div>
       </div>
       <div class="rank-row">
         <div class="rank-top">
           <span class="rank-num">05</span>
-          <span class="rank-name">Fast Food Simulator<small>9,602 누적 리뷰 · 신규 +46</small></span>
+          <span class="rank-name">Fast Food Simulator<small>
+            <span class="i18n-ko">9,602 누적 리뷰 · 신규 +46</span>
+            <span class="i18n-en" hidden>9,602 cumulative reviews · +46 new</span>
+          </small></span>
           <span class="rank-stat stat-down">-0.18pp</span>
         </div>
         <div class="tags"><span class="tag-chip">Simulation</span><span class="tag-chip">Co-op</span><span class="tag-chip">Early Access</span></div>
-        <div class="why negative"><b>왜</b>코옵으로 하면 재밌다는 평은 여전하지만, 2025년 10월 이후 업데이트가 끊긴 "사실상 방치" 상태라는 지적이 반복되며 신뢰가 흔들리는 중.</div>
+        <div class="why negative i18n-ko"><b>왜</b>코옵으로 하면 재밌다는 평은 여전하지만, 2025년 10월 이후 업데이트가 끊긴 "사실상 방치" 상태라는 지적이 반복되며 신뢰가 흔들리는 중.</div>
+        <div class="why negative i18n-en" hidden><b>Why</b>Still praised as fun in co-op, but repeated complaints that it's been "effectively abandoned" since updates stopped in October 2025 are eroding trust.</div>
       </div>
     </div>
   </div>
 
   <div class="subscribe">
-    <div class="subscribe-text"><b>뉴스레터 구독하기</b>매주 이 페이지 내용을 이메일로 받아보세요.</div>
-    <a class="subscribe-cta" href="https://buttondown.com/gomdol040422" target="_blank" rel="noopener">구독하기 →</a>
+    <div class="subscribe-text i18n-ko"><b>뉴스레터 구독하기</b>매주 이 페이지 내용을 이메일로 받아보세요.</div>
+    <div class="subscribe-text i18n-en" hidden><b>Subscribe to the newsletter</b>Get this page's content by email, every week.</div>
+    <a class="subscribe-cta i18n-ko" href="https://buttondown.com/gomdol040422" target="_blank" rel="noopener">구독하기 →</a>
+    <a class="subscribe-cta i18n-en" hidden href="https://buttondown.com/gomdol040422" target="_blank" rel="noopener">Subscribe →</a>
   </div>
 
-  <div class="disclosure">
+  <div class="disclosure i18n-ko">
     <b>왜 아직 베타인가</b> — 스냅샷이 07-25~07-30, 6일치까지 쌓였습니다 (목표 트레일링 7일 중
     6일차). 메가 히트 순위는 이제 신뢰할 만한 신호지만, 신흥 주목작의 +5~+8 수준 증가량은
     여전히 작은 표본이라 노이즈일 가능성을 열어두고 봐주세요. 데이터가 쌓이는 대로 계속 갱신합니다.<br><br>
@@ -561,11 +689,36 @@
     게임(예: Hollow Knight, Strayed)은 이번 순위에서 수동으로 제외했습니다. 태그 정확도는
     계속 점검 중입니다.
   </div>
+  <div class="disclosure i18n-en" hidden>
+    <b>Why still beta</b> — Snapshots have accumulated for 6 days (07-25 → 07-30), day 6 of
+    a target trailing 7-day window. The Established Titles ranking is now a reasonably
+    reliable signal, but the +5-8 range in Emerging Picks is still a small sample — treat it
+    as possible noise. Updated continuously as more data accumulates.<br><br>
+    <b>Tag/commentary sources</b> — Genres and tags come from the public SteamSpy/Steam APIs.
+    "Why" commentary is written by directly reading and summarizing each game's top-voted
+    Steam reviews.<br><br>
+    <b>Note</b> — Candidates pulled in via SteamSpy's Co-op tag that don't actually carry a
+    Co-op category on Steam (e.g. Hollow Knight, Strayed) were manually excluded from this
+    ranking. Tag accuracy is an ongoing check.
+  </div>
 
   <footer>
-    <span>CoopPulse — 코옵 인디게임 리뷰 트래커</span>
+    <span class="i18n-ko">CoopPulse — 코옵 인디게임 리뷰 트래커</span>
+    <span class="i18n-en" hidden>CoopPulse — a co-op indie game review tracker</span>
     <span><a href="https://github.com/owsjtld/CoopPulse">GitHub</a></span>
   </footer>
 </div>
+<script>
+  function toggleLang() {
+    var isEn = document.body.classList.toggle('lang-en');
+    document.querySelectorAll('.i18n-ko').forEach(function (el) { el.hidden = isEn; });
+    document.querySelectorAll('.i18n-en').forEach(function (el) { el.hidden = !isEn; });
+    document.getElementById('langToggle').textContent = isEn ? 'KO' : 'EN';
+    document.documentElement.lang = isEn ? 'en' : 'ko';
+    document.title = isEn
+      ? 'CoopPulse — Trending Co-op Indie Games This Week'
+      : 'CoopPulse — 이번 주 뜨는 코옵 인디게임';
+  }
+</script>
 </body>
 </html>
