@@ -1,7 +1,12 @@
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
-from config import EMERGING_MIN_REVIEWS, MEGA_HIT_THRESHOLD, RATING_MOVER_MIN_NEW_REVIEWS
+from config import (
+    EMERGING_MIN_GROWTH,
+    EMERGING_MIN_REVIEWS,
+    MEGA_HIT_THRESHOLD,
+    RATING_MOVER_MIN_NEW_REVIEWS,
+)
 from db import get_conn
 
 
@@ -35,13 +40,15 @@ def _load_window_deltas(days=7):
             if oldest_pct is not None and latest_pct is not None
             else None
         )
+        review_growth = latest_count - oldest_count
         deltas.append(
             {
                 "app_id": app_id,
                 "name": name_row[0] if name_row else None,
                 "oldest_count": oldest_count,
                 "latest_count": latest_count,
-                "review_growth": latest_count - oldest_count,
+                "review_growth": review_growth,
+                "review_growth_pct": round(100 * review_growth / oldest_count, 1) if oldest_count else None,
                 "oldest_positive_pct": oldest_pct,
                 "latest_positive_pct": latest_pct,
                 "positive_pct_change": positive_pct_change,
@@ -58,14 +65,17 @@ def top5_mega_hits(days=7, limit=5):
     return deltas[:limit]
 
 
-def top5_emerging(days=7, limit=5):
-    """EMERGING_MIN_REVIEWS ~ MEGA_HIT_THRESHOLD 사이(윈도우 시작 시점 기준) 신흥작 중 리뷰 증가량 top N."""
+def top5_emerging(days=7, limit=5, min_growth=EMERGING_MIN_GROWTH):
+    """EMERGING_MIN_REVIEWS ~ MEGA_HIT_THRESHOLD 사이(윈도우 시작 시점 기준) 신흥작 중,
+    신규 리뷰가 min_growth 이상인 게임을 %증가율 top N으로 뽑는다. 이 구간은 베이스가
+    작아 절대 증가량으로 줄세우면 원래 리뷰가 많은 쪽이 상시 상위를 차지하므로 %증가율로 정렬."""
     deltas = [
         d
         for d in _load_window_deltas(days)
         if EMERGING_MIN_REVIEWS <= d["oldest_count"] < MEGA_HIT_THRESHOLD
+        and d["review_growth"] >= min_growth
     ]
-    deltas.sort(key=lambda d: d["review_growth"], reverse=True)
+    deltas.sort(key=lambda d: d["review_growth_pct"], reverse=True)
     return deltas[:limit]
 
 
